@@ -26,11 +26,11 @@ const Footer = () => {
        <section className="w-full bg-[#3a2518] text-[#e8d9cf]">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-10">
-             <div className="col-span-1 lg:col-span-2 flex items-start gap-4">
-               <img src="/images/logo.png" alt="logo" className="w-14 h-14 rounded-full object-cover" />
-               <div>
-                 <p className="text-xl font-semibold">Ranny Dairy.</p>
-                 <p className="text-sm opacity-80 mt-1">Freshness you can trust</p>
+             <div className="col-span-1 lg:col-span-2 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+               <img src="/images/logonew.png" alt="logo" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full object-cover shrink-0" />
+               <div className="leading-tight">
+                 <p className="text-2xl sm:text-2xl lg:text-3xl font-semibold text-white">Ranny Dairy.</p>
+                 {/* <p className="text-sm opacity-80 mt-1">Freshness you can trust</p> */}
                </div>
              </div>
  
