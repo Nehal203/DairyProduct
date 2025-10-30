@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const categories = [
   { label: 'Dairy Product', icon: '/images/dairy.png' },
@@ -10,6 +10,16 @@ const categories = [
 ];
 
 const Home = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalSlides = 6;
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
   return (
     <main id="home" className="pt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,9 +33,22 @@ const Home = () => {
             </div>
           ))}
         </section>
-
-        <section className="relative overflow-hidden rounded">
-          <img src="/images/hero.jpg" alt="hero" className="w-full h-[420px] object-fit" />
+ 
+        <section className="relative overflow-hidden rounded-lg h-[420px] bg-gray-100">
+          <div className="relative w-full h-full">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <div 
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                style={{
+                  backgroundImage: `url(/images/slider-${index + 1}.png)`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  transition: 'opacity 1s ease-in-out'
+                }}
+              />
+            ))}
+          </div>
           <div className="absolute inset-0 bg-black/45" />
           <div className="absolute inset-0 flex items-center">
             <div className="px-6 sm:px-10 md:px-16 max-w-2xl">
@@ -39,9 +62,9 @@ const Home = () => {
                 massa nisi orci. Ac maecenas orci gravida lacus mi orci.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
-                <a href="" className="inline-flex items-center bg-[#E5C96C] hover:bg-white text-[#18555C] px-5 py-2 rounded-md text-sm font-semibold transition">
+                <a href="" className="group inline-flex items-center bg-[#E5C96C] hover:bg-white text-[#18555C] px-5 py-2 rounded-md text-sm font-semibold transition">
                   Visit Our Farm
-                  <span className="ml-3 inline-flex items-center justify-center w-7 h-7 rounded bg-[#18555C] hover:text-[#18555C] hover:bg-[#E5C96C] text-white">
+                  <span className="ml-3 inline-flex items-center justify-center w-7 h-7 rounded bg-[#18555C] group-hover:text-[#18555C] group-hover:bg-[#E5C96C] text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
                       <path fillRule="evenodd" d="M3 10a1 1 0 011-1h9.586L10.293 5.707a1 1 0 111.414-1.414l5.5 5.5a1 1 0 010 1.414l-5.5 5.5a1 1 0 11-1.414-1.414L13.586 11H4a1 1 0 01-1-1z" clipRule="evenodd" />
                     </svg>

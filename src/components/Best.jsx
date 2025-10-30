@@ -9,6 +9,8 @@ const allProducts = [
   { id: 4, title: 'Cow Pure Milk', price: 54, rating: 5, img: '/images/milk.jpg', badge: '-17%' },
 ];
 
+
+
 const Best = () => {
   const [active, setActive] = useState(categories[0]);
   const products = allProducts;

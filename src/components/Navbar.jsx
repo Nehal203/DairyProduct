@@ -140,7 +140,7 @@ const Navbar = () => {
                                     </div>
                                 </div>
                             )}
-                           
+
                         </li>
                         <li><a href="/careers" className="hover:text-green-600">Careers</a></li>
                         <li><a href="/blog" className="hover:text-green-600">Blog</a></li>
@@ -157,7 +157,8 @@ const Navbar = () => {
                             <span>Wishlist</span>
                         </a>
                         <a href="/cart" className="flex items-center gap-2 hover:text-green-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M2.25 3a.75.75 0 0 0 0 1.5h1.386c.27 0 .505.18.574.442l2.182 8.174a2.25 2.25 0 0 0 2.176 1.684h7.227a2.25 2.25 0 0 0 2.176-1.684l1.27-4.763a.75.75 0 0 0-.725-.953H6.77L6.2 4.424A2.25 2.25 0 0 0 3.636 3H2.25Zm6 16.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm9-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z" /></svg>
+                            <span className="text-xs font-semibold bg-yellow-400 text-gray-900 px-2 py-1 rounded-full">0</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M2.25 3a.75.75 0 0 0 0 1.5h1.386c.27 0 .505.18.574.442l2.182 8.174a2.25 2.25 0 0 0 2.176 1.684h7.227a2.25 2.25 0 0 0 2.176-1.684l1.27-4.763a.75.75 0 0 0-.725-.953H6.77L6.2 4.424A2.25 2.25 0 0 0 3.636 3H2.25Zm6 16.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm9-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z" /></svg>   
                             <span>Cart</span>
                         </a>
                     </div>
