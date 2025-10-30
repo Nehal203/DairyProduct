@@ -92,7 +92,7 @@ const Footer = () => {
                    <p className="text-lg font-semibold text-white">Email:</p>
                    <p className="text-sm opacity-90">info@example.com</p>
                  </div>
-               </div>
+               </div> 
                <div className="mt-5 flex items-center gap-4">
                  {["facebook","twitter","instagram"].map((key, idx) => (
                    <span key={idx} className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#5a3a29] hover:bg-[#6b4733] transition">

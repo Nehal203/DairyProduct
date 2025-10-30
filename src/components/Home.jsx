@@ -11,7 +11,7 @@ const categories = [
 
 const Home = () => {
   return (
-    <main id="home" className="pt-20">
+    <main id="home" className="pt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 items-start py-8">
           {categories.map((c) => (
