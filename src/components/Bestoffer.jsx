@@ -1,4 +1,36 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FiShoppingCart } from 'react-icons/fi';
+import { useCart } from '../contexts/CartContext';
+
 const Bestoffer = () => {
+    const { addToCart } = useCart();
+    const [isAdding, setIsAdding] = useState(null);
+
+    const handleAddToCart = async (product, e) => {
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+        if (isAdding) return;
+
+        try {
+            setIsAdding(product.id);
+            await addToCart({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                oldPrice: product.oldPrice,
+                img: product.img,
+                quantity: 1
+            });
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+        } finally {
+            setIsAdding(null);
+        }
+    };
     const leftCards = [
         { id: 1, title: 'Ice Cream', price: 350, oldPrice: 400, rating: 5, img: '/images/offer1.png', badge: '-23%' },
         { id: 2, title: 'Ghee', price: 250, rating: 4, img: '/images/offer2.jpg' },
@@ -11,15 +43,73 @@ const Bestoffer = () => {
         { id: 6, title: 'Cheese', price: 50, rating: 0, img: '/images/offer6.jpg' },
     ];
 
-    return (
-        <section className="py-12 bg-white" id="best-offers">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900">Best Offer For You</h2>
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
 
-                <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div className="space-y-7">
+    const item = {
+        hidden: { opacity: 0, y: 20 },
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: 'spring',
+                stiffness: 100,
+                damping: 10
+            }
+        }
+    };
+
+    const buttonHover = {
+        scale: 1.05,
+        transition: { duration: 0.2 }
+    };
+
+    const buttonTap = {
+        scale: 0.95
+    };
+
+    return (
+        <motion.section
+            className="py-12 bg-white"
+            id="best-offers"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
+        >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <motion.h2
+                    className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-2"
+                    initial={{ y: -20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                >
+                    Best Offer For You
+                </motion.h2>
+
+                <motion.div
+                    className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6"
+                    variants={container}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
+                    <motion.div className="space-y-7" variants={container}>
                         {leftCards.map((p) => (
-                            <div key={p.id} className="bg-white rounded-2xl p-0 shadow-md border hover:shadow-lg transition flex items-center">
+                            <motion.div
+                                key={p.id}
+                                className="bg-white rounded-2xl p-0 shadow-md border hover:shadow-lg transition flex items-center"
+                                variants={item}
+                                whileHover={{ y: -5 }}
+                            >
                                 <div className="relative w-40 h-40 rounded-l-2xl overflow-hidden">
                                     {p.badge && (
                                         <span className="absolute left-3 top-3 z-10 text-xs font-semibold bg-yellow-400 text-gray-900 px-2 py-1 rounded-full">{p.badge}</span>
@@ -28,17 +118,43 @@ const Bestoffer = () => {
                                 </div>
                                 <div className="p-4 flex-1">
                                     <div className="flex items-center justify-between">
-                                        <div className="flex items-center text-yellow-400 text-sm">{'★★★★★'.slice(0, p.rating)}<span className="ml-1 text-gray-400">({p.rating})</span></div>
+                                        <div className="flex items-center text-yellow-400 text-sm">
+                                            {'★★★★★'.slice(0, p.rating)}
+                                            <span className="ml-1 text-gray-400">({p.rating})</span>
+                                        </div>
                                         <button className="text-gray-500 hover:text-red-500" aria-label="favorite">♡</button>
                                     </div>
                                     <h3 className="mt-1 text-gray-800 font-semibold text-md line-clamp-1">{p.title}</h3>
-                                    <span className="text-green-700 font-semibold">${p.price}.00</span>
+                                    <div className="flex items-center justify-between mt-2">
+                                        <span className="text-green-700 font-semibold">${p.price}.00</span>
+                                        <motion.button
+                                            onClick={(e) => handleAddToCart(p, e)}
+                                            disabled={isAdding === p.id}
+                                            className={`p-1.5 rounded-full ${isAdding === p.id
+                                                    ? 'bg-green-500'
+                                                    : 'bg-[#39251A] hover:bg-[#2a1c14]'
+                                                } text-white transition-colors`}
+                                            aria-label="Add to cart"
+                                            whileHover={buttonHover}
+                                            whileTap={buttonTap}
+                                        >
+                                            {isAdding === p.id ? (
+                                                <span className="w-4 h-4 block text-sm">✓</span>
+                                            ) : (
+                                                <FiShoppingCart className="w-4 h-4" />
+                                            )}
+                                        </motion.button>
+                                    </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
 
-                    <div className="bg-white rounded-2xl p-0 shadow-md border hover:shadow-lg transition">
+                    <motion.div
+                        className="bg-white rounded-2xl p-0 shadow-md border hover:shadow-lg transition"
+                        variants={item}
+                        whileHover={{ scale: 1.02 }}
+                    >
                         <div className="relative h-96 rounded-xl overflow-hidden">
                             <span className="absolute left-3 top-3 z-10 text-xs font-semibold bg-yellow-400 text-gray-900 px-2 py-1 rounded-full">-21%</span>
                             <img src="/images/offers.jpg" alt="Milk Product" className="absolute inset-0 w-full h-full object-cover" />
@@ -72,63 +188,133 @@ const Bestoffer = () => {
                                 <span className="text-gray-400 line-through text-xs">$799.00</span>
                             </div>
                             <div className="flex justify-end">
-                                <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-900 text-white hover:bg-gray-800" aria-label="add-to-cart">🛒</button>
+                                <motion.button
+                                    onClick={(e) => handleAddToCart({
+                                        id: 'milk-product-offer',
+                                        title: 'Milk Product',
+                                        price: 599,
+                                        oldPrice: 799,
+                                        img: '/images/offers.jpg',
+                                        quantity: 1
+                                    }, e)}
+                                    disabled={isAdding === 'milk-product-offer'}
+                                    className={`w-9 h-9 flex items-center justify-center rounded-full ${isAdding === 'milk-product-offer'
+                                            ? 'bg-green-500'
+                                            : 'bg-gray-900 hover:bg-gray-800'
+                                        } text-white transition-colors`}
+                                    aria-label="Add to cart"
+                                    whileHover={buttonHover}
+                                    whileTap={buttonTap}
+                                >
+                                    {isAdding === 'milk-product-offer' ? '✓' : '🛒'}
+                                </motion.button>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="space-y-7">
+                    <motion.div className="space-y-7" variants={container}>
                         {rightCards.map((p) => (
-                            <div key={p.id} className="bg-white rounded-2xl p-0 shadow-md border hover:shadow-lg transition flex items-center">
+                            <motion.div
+                                key={p.id}
+                                className="bg-white rounded-2xl p-0 shadow-md border hover:shadow-lg transition flex items-center"
+                                variants={item}
+                                whileHover={{ y: -5 }}
+                            >
                                 <div className="relative w-40 h-40 rounded-l-2xl overflow-hidden">
                                     <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-cover" />
                                 </div>
                                 <div className="p-4 flex-1">
                                     <div className="flex items-center justify-between">
-                                        <div className="flex items-center text-yellow-400 text-sm">{'★★★★★'.slice(0, p.rating)}<span className="ml-1 text-gray-400">({p.rating})</span></div>
+                                        <div className="flex items-center text-yellow-400 text-sm">
+                                            {'★★★★★'.slice(0, p.rating)}
+                                            <span className="ml-1 text-gray-400">({p.rating})</span>
+                                        </div>
                                         <button className="text-gray-500 hover:text-red-500" aria-label="favorite">♡</button>
                                     </div>
                                     <h3 className="mt-1 text-gray-800 font-semibold text-md line-clamp-1">{p.title}</h3>
-                                    <span className="text-green-700 font-semibold">${p.price}.00</span>
+                                    <div className="flex items-center justify-between mt-2">
+                                        <span className="text-green-700 font-semibold">${p.price}.00</span>
+                                        <motion.button
+                                            onClick={(e) => handleAddToCart(p, e)}
+                                            disabled={isAdding === p.id}
+                                            className={`p-1.5 rounded-full ${isAdding === p.id
+                                                    ? 'bg-green-500'
+                                                    : 'bg-[#39251A] hover:bg-[#2a1c14]'
+                                                } text-white transition-colors`}
+                                            aria-label="Add to cart"
+                                            whileHover={buttonHover}
+                                            whileTap={buttonTap}
+                                        >
+                                            {isAdding === p.id ? (
+                                                <span className="w-4 h-4 block text-sm">✓</span>
+                                            ) : (
+                                                <FiShoppingCart className="w-4 h-4" />
+                                            )}
+                                        </motion.button>
+                                    </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
-                </div>
+                    </motion.div>
 
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4">
-                        <div className="text-2xl">🏷️</div>
-                        <div>
-                            <p className="font-semibold text-gray-900">Best prices & offers</p>
-                            <p className="text-sm text-gray-500">Orders $50 or more</p>
-                        </div>
-                    </div>
-                    <div className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4">
-                        <div className="text-2xl">🚚</div>
-                        <div>
-                            <p className="font-semibold text-gray-900">Free delivery</p>
-                            <p className="text-sm text-gray-500">24/7 amazing services</p>
-                        </div>
-                    </div>
-                    <div className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4">
-                        <div className="text-2xl">💸</div>
-                        <div>
-                            <p className="font-semibold text-gray-900">Great daily deal</p>
-                            <p className="text-sm text-gray-500">When you sign up</p>
-                        </div>
-                    </div>
-                    <div className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4">
-                        <div className="text-2xl">↩️</div>
-                        <div>
-                            <p className="font-semibold text-gray-900">Easy returns</p>
-                            <p className="text-sm text-gray-500">Within 30 days</p>
-                        </div>
-                    </div>
-                </div>
+                    
+                </motion.div>
+                <motion.div
+                        className="mt-10  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 "
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        <motion.div
+                            className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4"
+                            whileHover={{ y: -5 }}
+                            transition={{ type: 'spring', stiffness: 300 }}
+                        >
+                            <div className="text-2xl">🏷️</div>
+                            <div>
+                                <p className="font-semibold text-gray-900">Best prices & offers</p>
+                                <p className="text-sm text-gray-500">Orders $50 or more</p>
+                            </div>
+                        </motion.div>
+                        <motion.div
+                            className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4"
+                            whileHover={{ y: -5 }}
+                            transition={{ type: 'spring', stiffness: 300 }}
+                        >
+                            <div className="text-2xl">🚚</div>
+                            <div>
+                                <p className="font-semibold text-gray-900">Free delivery</p>
+                                <p className="text-sm text-gray-500">24/7 amazing services</p>
+                            </div>
+                        </motion.div>
+                        <motion.div
+                            className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4"
+                            whileHover={{ y: -5 }}
+                            transition={{ type: 'spring', stiffness: 300 }}
+                        >
+                            <div className="text-2xl">💸</div>
+                            <div>
+                                <p className="font-semibold text-gray-900">Great daily deal</p>
+                                <p className="text-sm text-gray-500">When you sign up</p>
+                            </div>
+                        </motion.div>
+                        <motion.div
+                            className="bg-gray-100 rounded-2xl p-6 flex items-start gap-4"
+                            whileHover={{ y: -5 }}
+                            transition={{ type: 'spring', stiffness: 300 }}
+                        >
+                            <div className="text-2xl">↩️</div>
+                            <div>
+                                <p className="font-semibold text-gray-900">Easy returns</p>
+                                <p className="text-sm text-gray-500">Within 30 days</p>
+                            </div>
+                        </motion.div>
+                    </motion.div>
             </div>
-        </section>
-    )
+        </motion.section>
+    );
 };
+
 
 export default Bestoffer;

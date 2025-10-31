@@ -1,44 +1,38 @@
-import { useState } from 'react';
-import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
+import { FiTrash2, FiPlus, FiMinus, FiShoppingBag } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState([
-        {
-            id: 1,
-            name: 'Fresh Organic Vegetable',
-            price: 10.99,
-            quantity: 1,
-            image: 'https://via.placeholder.com/80',
-            category: 'Vegetable',
-            weight: '1kg',
-            stock: 10
-        },
-        {
-            id: 2,
-            name: 'Organic Apple',
-            price: 5.99,
-            quantity: 2,
-            image: 'https://via.placeholder.com/80',
-            category: 'Fruit',
-            weight: '500g',
-            stock: 15
-        }
-    ]);
+    const { 
+        cartItems, 
+        removeFromCart, 
+        updateQuantity, 
+        cartTotal, 
+        clearCart 
+    } = useCart();
 
-    const updateQuantity = (id, newQuantity) => {
-        if (newQuantity < 1) return;
-        setCartItems(cartItems.map(item => 
-            item.id === id ? { ...item, quantity: Math.min(newQuantity, item.stock) } : item
-        ));
-    };
+    const shipping = cartItems.length > 0 ? 5.00 : 0;
+    const total = cartTotal + shipping;
 
-    const removeItem = (id) => {
-        setCartItems(cartItems.filter(item => item.id !== id));
-    };
-
-    const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = 5.00;
-    const total = subtotal + shipping;
+    if (cartItems.length === 0) {
+        return (
+            <div className="min-h-screen bg-gray-50 pt-28 pb-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto text-center py-12">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-4">
+                        <FiShoppingBag className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
+                    <p className="text-gray-600 mb-6">Looks like you haven't added anything to your cart yet.</p>
+                    <Link 
+                        to="/" 
+                        className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#39251A] hover:bg-[#2a1c14]"
+                    >
+                        Continue Shopping
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <section id="cart" className="pt-28">
@@ -73,22 +67,24 @@ const Cart = () => {
                             {cartItems.map((item) => (
                                 <div key={item.id} className="p-4 border-b last:border-b-0 flex flex-col md:grid md:grid-cols-12 gap-4">
                                     <div className="flex items-center col-span-5">
-                                        <div className="flex-shrink-0 h-20 w-20 bg-gray-100 rounded-md overflow-hidden">
-                                            <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="h-full w-full object-cover"
-                                            />
-                                        </div>
-                                        <div className="ml-4">
-                                            <h3 className="text-sm font-medium text-gray-900">{item.name}</h3>
-                                            <p className="text-sm text-gray-500">{item.category}</p>
-                                            <p className="text-xs text-gray-400">{item.weight}</p>
-                                        </div>
+                                    <div className="flex-shrink-0 h-20 w-20 bg-gray-100 rounded-md overflow-hidden">
+                                        <img
+                                            src={item.img}
+                                            alt={item.title}
+                                            className="h-full w-full object-cover"
+                                        />
                                     </div>
+                                    <div className="ml-4">
+                                        <h3 className="text-sm font-medium text-gray-900">{item.title}</h3>
+                                        <p className="text-sm text-gray-500">${item.price.toFixed(2)}</p>
+                                        {item.oldPrice && (
+                                            <p className="text-xs text-gray-400 line-through">${item.oldPrice.toFixed(2)}</p>
+                                        )}
+                                    </div>
+                                </div>
 
                                     <div className="flex items-center justify-start md:justify-center col-span-2">
-                                        <span className="text-sm font-medium text-gray-900">${item.price.toFixed(2)}</span>
+                                        <span className="text-sm font-medium text-gray-900">${(item.price * item.quantity).toFixed(2)}</span>
                                     </div>
 
                                     <div className="flex items-center justify-start md:justify-center col-span-3">
@@ -99,9 +95,7 @@ const Cart = () => {
                                             >
                                                 <FiMinus size={14} />
                                             </button>
-                                            <span className="px-4 py-1 text-sm w-12 text-center">
-                                                {item.quantity}
-                                            </span>
+                                            <span className="px-3 py-1 text-gray-900 w-8 text-center">{item.quantity}</span>
                                             <button 
                                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                                 className="px-3 py-1 text-gray-600 hover:bg-gray-50"
@@ -117,7 +111,7 @@ const Cart = () => {
                                             ${(item.price * item.quantity).toFixed(2)}
                                         </span>
                                         <button 
-                                            onClick={() => removeItem(item.id)}
+                                            onClick={() => removeFromCart(item.id)}
                                             className="text-gray-400 hover:text-red-500"
                                         >
                                             <FiTrash2 size={18} />
@@ -135,9 +129,9 @@ const Cart = () => {
                                 <button className="px-6 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
                                     Update Cart
                                 </button>
-                                <button className="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#39251A] hover:bg-[#683292]">
+                                <Link to="/checkout"><button className="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#39251A] hover:bg-[#683292]">
                                     Proceed to Checkout
-                                </button>
+                                </button></Link>
                             </div>
                         </div>
                     </div>
@@ -148,8 +142,8 @@ const Cart = () => {
                             
                             <div className="space-y-4">
                                 <div className="flex justify-between">
-                                    <span className="text-sm text-gray-600">Subtotal</span>
-                                    <span className="text-sm font-medium">${subtotal.toFixed(2)}</span>
+                                    <span className="text-sm text-gray-600">Subtotal ({cartItems.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
+                                    <span className="text-sm font-medium">${cartTotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-sm text-gray-600">Shipping</span>

@@ -1,10 +1,44 @@
 import React, { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { productItems } from './Productitem';
+import { useState } from 'react';
+import { useCart } from '../contexts/CartContext';
 
 const Productpage = () => {
     const [params, setParams] = useSearchParams();
     const active = params.get('category') || 'All';
+    const [priceRange, setPriceRange] = useState({
+        min: 0,
+        max: 1000
+    });
+    const [weightFilter, setWeightFilter] = useState('all');
+    const { addToCart } = useCart();
+    const navigate = useNavigate();
+    const [isAdding, setIsAdding] = useState(null);
+
+    const handleAddToCart = async (product, e) => {
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        
+        setIsAdding(product.id);
+        try {
+            await addToCart({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                oldPrice: product.oldPrice,
+                img: product.img,
+                quantity: 1
+            });
+            navigate('');
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+        } finally {
+            setIsAdding(null);
+        }
+    };
 
     const categories = useMemo(() => {
         const set = new Set(productItems.map(p => p.category));
@@ -12,9 +46,27 @@ const Productpage = () => {
     }, []);
 
     const products = useMemo(() => {
-        if (active === 'All') return productItems;
-        return productItems.filter(p => p.category === active);
-    }, [active]);
+        let filtered = [...productItems];
+        
+        // Filter by category
+        if (active !== 'All') {
+            filtered = filtered.filter(p => p.category === active);
+        }
+        
+        // Filter by price range
+        filtered = filtered.filter(p => 
+            p.price >= priceRange.min && p.price <= priceRange.max
+        );
+        
+        // Filter by weight if specified
+        if (weightFilter !== 'all') {
+            filtered = filtered.filter(p => 
+                p.weight && p.weight.toLowerCase().includes(weightFilter.toLowerCase())
+            );
+        }
+        
+        return filtered;
+    }, [active, priceRange, weightFilter]);
 
     const onSelect = (cat) => {
         if (cat === 'All') {
@@ -49,6 +101,47 @@ const Productpage = () => {
                                 </button>
                             ))}
                         </div>
+
+                        {/* Price Range Filter */}
+                        <div className="mb-6">
+                            <h4 className="text-lg font-semibold mb-3 text-gray-800">Price Range</h4>
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-gray-600">₹{priceRange.min}</span>
+                                    <span className="text-gray-600">₹{priceRange.max}</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="1000"
+                                    value={priceRange.max}
+                                    onChange={(e) => setPriceRange(prev => ({
+                                        ...prev,
+                                        max: parseInt(e.target.value)
+                                    }))}
+                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#4D3B31]"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Weight Filter */}
+                        <div className="mb-6">
+                            <h4 className="text-lg font-semibold mb-3 text-gray-800">Weight</h4>
+                            <div className="space-y-2">
+                                {['All', '500g', '1kg', '5kg', '10kg'].map((weight) => (
+                                    <label key={weight} className="flex items-center space-x-2 cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="weight"
+                                            checked={weightFilter === weight.toLowerCase()}
+                                            onChange={() => setWeightFilter(weight === 'All' ? 'all' : weight.toLowerCase())}
+                                            className="h-4 w-4 text-[#4D3B31] focus:ring-[#4D3B31] border-gray-300"
+                                        />
+                                        <span className="text-gray-700">{weight}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </aside>
 
@@ -78,7 +171,13 @@ const Productpage = () => {
                                     <p className="mt-1 text-gray-600 text-sm">{p.description}</p>
                                     <div className="mt-3 flex items-center justify-between">
                                         <span className="text-green-700 font-semibold">${p.price.toFixed(2)}</span>
-                                        <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-900 text-white hover:bg-gray-800">🛒</button>
+                                        <button 
+                                            onClick={(e) => handleAddToCart(p, e)}
+                                            disabled={isAdding === p.id}
+                                            className={`w-9 h-9 flex items-center justify-center rounded-full ${isAdding === p.id ? 'bg-green-600' : 'bg-gray-900 hover:bg-gray-800'} text-white transition-colors`}
+                                        >
+                                            {isAdding === p.id ? '✓' : '🛒'}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

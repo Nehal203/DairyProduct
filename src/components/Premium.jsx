@@ -1,4 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { useCart } from '../contexts/CartContext';
+import { FiShoppingCart, FiHeart } from 'react-icons/fi';
 
 const premiumProducts = [
   { id: 1, title: 'Fresh organic Cow Milk 500gm pack', price: 68.85, oldPrice: 72.8, rating: 4.0, img: '/images/product1.png', tag: 'Hot', category: 'Snack' },
@@ -36,39 +39,115 @@ const TagChip = ({ tag }) => {
   );
 };
 
-const Card = ({ p }) => (
-  <div className="bg-white rounded-2xl p-0 shadow-sm hover:shadow-md transition">
-    <div className="relative h-64 rounded-xl overflow-hidden bg-white">
-      <TagChip tag={p.tag} />
-      <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-contain p-6" />
-    </div>
+const Card = ({ p, index }) => {
+  const { addToCart } = useCart();
+  const [isFavorite, setIsFavorite] = React.useState(false);
+  
+  const cardVariants = {
+    offscreen: {
+      y: 50,
+      opacity: 0
+    },
+    onscreen: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.8,
+        delay: index * 0.1
+      }
+    }
+  };
+  
+  const buttonHover = {
+    scale: 1.05,
+    transition: { duration: 0.2 }
+  };
+  
+  const buttonTap = {
+    scale: 0.95
+  };
 
-    <div className="px-4 pt-4">
-      <p className="text-xs text-gray-400">{p.category}</p>
-      <h3 className="mt-1 text-gray-800 font-semibold text-sm sm:text-base line-clamp-2">{p.title}</h3>
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    addToCart({
+      id: p.id,
+      title: p.title,
+      price: p.price,
+      oldPrice: p.oldPrice,
+      img: p.img,
+      quantity: 1
+    });
+  };
 
-      <div className="mt-3 flex items-center justify-between">
-        <div className="flex items-center text-yellow-400 text-sm">
-          <span>{'★★★★★'.slice(0, Math.round(p.rating))}</span>
-          <span className="ml-1 text-gray-400">({p.rating})</span>
-        </div>
-        <button className="text-gray-500 hover:text-red-500" aria-label="favorite">♡</button>
+  return (
+    <motion.div 
+      className="bg-white rounded-2xl p-0 shadow-sm hover:shadow-md transition"
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={cardVariants}
+    >
+      <div className="relative h-64 rounded-xl overflow-hidden bg-white">
+        <TagChip tag={p.tag} />
+        <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-contain p-6" />
       </div>
 
-      <div className="mt-4 mb-5 flex items-center justify-between">
-        <div className="flex items-baseline gap-2">
-          <span className="text-emerald-700 font-semibold">${p.price}</span>
-          {p.oldPrice && <span className="text-gray-400 line-through text-xs">${p.oldPrice}</span>}
+      <div className="px-4 pt-4">
+        <p className="text-xs text-gray-400">{p.category}</p>
+        <h3 className="mt-1 text-gray-800 font-semibold text-sm sm:text-base line-clamp-2">{p.title}</h3>
+
+        <div className="mt-3 flex items-center justify-between">
+          <div className="flex items-center text-yellow-400 text-sm">
+            <span>{'★★★★★'.slice(0, Math.round(p.rating))}</span>
+            <span className="ml-1 text-gray-400">({p.rating})</span>
+          </div>
+          <motion.button 
+            onClick={() => setIsFavorite(!isFavorite)}
+            className={`text-gray-500 hover:text-red-500 ${isFavorite ? 'text-red-500' : ''}`}
+            aria-label="favorite"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <FiHeart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
+          </motion.button>
         </div>
-        <button className="px-3 py-2 rounded-md bg-gray-900 text-white text-xs hover:bg-gray-800" aria-label="add-to-cart">
-          Add
-        </button>
+
+        <div className="mt-4 mb-5 flex items-center justify-between">
+          <div className="flex items-baseline gap-2">
+            <span className="text-emerald-700 font-semibold">${p.price.toFixed(2)}</span>
+            {p.oldPrice && (
+              <span className="text-gray-400 line-through text-xs">${p.oldPrice.toFixed(2)}</span>
+            )}
+          </div>
+          <motion.button 
+            onClick={handleAddToCart}
+            className="px-3 py-2 rounded-md bg-[#39251A] text-white text-xs hover:bg-[#2a1c14] transition-colors flex items-center gap-1"
+            aria-label="add-to-cart"
+            whileHover={buttonHover}
+            whileTap={buttonTap}
+          >
+            <FiShoppingCart className="w-4 h-4" />
+            <span>Add</span>
+          </motion.button>
+        </div>
       </div>
-    </div>
-  </div>
-);
+    </motion.div>
+  );
+};
 
 const Premium = () => {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
   return (
     <section className="pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,14 +171,26 @@ const Premium = () => {
       </div>
 
       <div className="bg-[#F4D6DB] py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900">Farm Fresh Products</h2>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {premiumProducts.map((p) => (
-              <Card key={p.id} p={p} />
-            ))}
+        <motion.div 
+          className="container mx-auto px-4 py-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900">Farm Fresh Products</h2>
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              {premiumProducts.map((p, index) => (
+                <Card key={p.id} p={p} index={index} />
+              ))}
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

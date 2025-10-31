@@ -1,19 +1,56 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { productItems } from './Productitem';
 import { FaStar, FaStarHalfAlt, FaRegStar, FaShoppingCart, FaHeart, FaShare, FaLeaf, FaWeight, FaTag, FaBox } from 'react-icons/fa';
 import { MdOutlineLocalShipping, MdOutlinePayment } from 'react-icons/md';
+import { useCart } from '../contexts/CartContext';
 
 const Productdetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const { addToCart } = useCart();
     const product = productItems.find(p => p.id === parseInt(id));
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
     const [activeTab, setActiveTab] = useState('description');
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+    const handleAddToCart = async (e) => {
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        
+        if (!isAddingToCart) {
+            setIsAddingToCart(true);
+            
+            try {
+                await addToCart({
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,   
+                    oldPrice: product.oldPrice,
+                    img: product.img,
+                    quantity: quantity
+                });
+                
+            
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+            } finally {
+                setIsAddingToCart(false);
+            }
+        }
+    };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
     
     const relatedProducts = productItems
         .filter(p => p.category === product?.category && p.id !== product?.id)
-        .slice(0, 4);
+        .slice(0, 4);   
 
     if (!product) {
         return <div className="min-h-screen flex items-center justify-center">Product not found</div>;
@@ -36,12 +73,19 @@ const Productdetails = () => {
         return stars;
     };
 
-    const handleQuantityChange = (action) => {
-        if (action === 'increase') {
-            setQuantity(prev => prev + 1);
-        } else if (action === 'decrease' && quantity > 1) {
-            setQuantity(prev => prev - 1);
+    const handleQuantityChange = (action, e) => {
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
         }
+        setQuantity(prev => {
+            if (action === 'increase') {
+                return prev + 1;
+            } else if (action === 'decrease' && prev > 1) {
+                return prev - 1;
+            }
+            return prev;
+        });
     };
 
     return (
@@ -68,7 +112,11 @@ const Productdetails = () => {
                                     <button 
                                         key={i} 
                                         className={`rounded-xl overflow-hidden border-2 transition-all ${selectedImage === i-1 ? 'border-green-500' : 'border-transparent hover:border-green-400'}`}
-                                        onClick={() => setSelectedImage(i-1)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            setSelectedImage(i-1);
+                                        }}
                                     >
                                         <div className="aspect-square bg-gray-50 flex items-center justify-center p-2">
                                             <img 
@@ -94,8 +142,15 @@ const Productdetails = () => {
                                     </div>
                                 </div>
                                 <div className="flex space-x-2">
-                                    <button className="p-2 rounded-full hover:bg-gray-100">
-                                        <FaHeart className="text-gray-500 hover:text-red-500" />
+                                    <button 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            setIsFavorite(!isFavorite);
+                                        }}
+                                        className={`p-2 rounded-full hover:bg-gray-100 ${isFavorite ? 'text-red-500' : 'text-gray-500'}`}
+                                    >
+                                        <FaHeart className={isFavorite ? 'fill-current' : ''} />
                                     </button>
                                     <button className="p-2 rounded-full hover:bg-gray-100">
                                         <FaShare className="text-gray-500 hover:text-green-500" />
@@ -126,22 +181,44 @@ const Productdetails = () => {
                                 <div className="flex items-center space-x-4">
                                     <div className="flex items-center border border-gray-200 rounded-lg">
                                         <button 
-                                            onClick={() => handleQuantityChange('decrease')}
-                                            className="px-4 py-2 text-gray-600 hover:bg-gray-100"
+                                            type="button"
+                                            onClick={(e) => handleQuantityChange('decrease', e)}
+                                            className="px-4 py-2 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-200 rounded-l-lg"
+                                            aria-label="Decrease quantity"
                                         >
                                             -
                                         </button>
-                                        <span className="px-4 py-2">{quantity}</span>
+                                        <span className="px-4 py-2 w-12 text-center border-l border-r border-gray-200">
+                                            {quantity}
+                                        </span>
                                         <button 
-                                            onClick={() => handleQuantityChange('increase')}
-                                            className="px-4 py-2 text-gray-600 hover:bg-gray-100"
+                                            type="button"
+                                            onClick={(e) => handleQuantityChange('increase', e)}
+                                            className="px-4 py-2 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-200 rounded-r-lg"
+                                            aria-label="Increase quantity"
                                         >
                                             +
                                         </button>
                                     </div>
-                                    <button className="flex-1 bg-[#4D3B31] hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center space-x-2 transition">
-                                        <FaShoppingCart />
-                                        <span>Add to Cart</span>
+                                    <button 
+                                        onClick={handleAddToCart}
+                                        disabled={isAddingToCart}
+                                        className={`flex-1 ${isAddingToCart ? 'bg-green-700' : 'bg-[#4D3B31] hover:bg-[#3a2c25]'} text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center space-x-2 transition`}
+                                    >
+                                        {isAddingToCart ? (
+                                            <>
+                                                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                <span>Adding...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaShoppingCart />
+                                                <span>Add to Cart</span>
+                                            </>
+                                        )}
                                     </button>
                                 </div>
 

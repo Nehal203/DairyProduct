@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import About from './components/About';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { CartProvider } from './contexts/CartContext';
 import Front from './components/Front';
 import Blog from './components/Blog';
 import Blogdetails from './components/Blogdetails';
@@ -13,13 +14,16 @@ import Contactus from './components/Contactus';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 
 function App() {
   return (
     <div>
-      <Router>
-        <Navbar />
-        <Routes>
+      <CartProvider>
+        <Router>
+          <Navbar />
+          <div className="min-h-screen">
+            <Routes>
           <Route path="/" element={<Front />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
@@ -30,9 +34,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signup" element={<Signup />} />
-        </Routes>
-        <Footer />
-      </Router>
+          <Route path="/checkout" element={<Checkout />} />
+            </Routes>
+          </div>
+          <Footer />
+        </Router>
+      </CartProvider>
     </div>
   );
 }

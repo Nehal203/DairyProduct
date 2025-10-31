@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const categories = [
-  { label: 'Dairy Product', icon: '/images/dairy.png' },
-  { label: 'Sweets', icon: '/images/sweets.png' },
-  { label: 'Ice Cream', icon: '/images/icecream.png' },
-  { label: 'Beverages', icon: '/images/beverages.png' },
-  { label: 'Baby Nutrition', icon: '/images/babynutrition.png' },
-  { label: 'Organic', icon: '/images/organic.png' },
+  { label: 'Milk & Dairies', path: 'milk-dairies', icon: '/images/dairy.png' },
+  { label: 'Sweets', path: 'sweets', icon: '/images/sweets.png' },
+  { label: 'Ice Cream', path: 'ice-cream', icon: '/images/icecream.png' },
+  { label: 'Beverage', path: 'beverage', icon: '/images/beverages.png' },
+  { label: 'Baby Nutrition', path: 'baby-nutrition', icon: '/images/babynutrition.png' },
+  { label: 'Organic', path: 'organic', icon: '/images/organic.png' },
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 6;
+
+  const handleCategoryClick = (path) => {
+    navigate(`/${path}`);
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -20,26 +27,71 @@ const Home = () => {
 
     return () => clearInterval(timer);
   }, []);
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <main id="home" className="pt-28">
+    <motion.main 
+      id="home" 
+      className="pt-28"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 items-start py-8">
-          {categories.map((c) => (
-            <div key={c.label} className="flex flex-col text-black items-center text-center">
-              <div className="cursor-pointer w-28 h-28 rounded-full border-2 border-black flex items-center justify-center bg-white">
-                <img src={c.icon} alt={c.label} className="w-22 h-22 object-contain opacity-70" />
+        <motion.section 
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 items-start py-8"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          {categories.map((c, index) => (
+            <motion.div 
+              key={c.label}
+              variants={item}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex flex-col text-black items-center text-center hover:scale-105 transition-transform duration-200"
+              onClick={() => handleCategoryClick(c.path)}
+            >
+              <div className="cursor-pointer w-28 h-28 rounded-full border-2 border-black flex items-center justify-center bg-white hover:shadow-lg">
+                <img 
+                  src={c.icon} 
+                  alt={c.label} 
+                  className="w-22 h-22 object-contain opacity-70 hover:opacity-100 transition-opacity duration-200" 
+                />
               </div>
-              <p className="mt-3 text-gray-700 font-medium text-sm sm:text-base">{c.label}</p>
-            </div>
+              <p className="mt-3 text-gray-700 font-medium text-sm sm:text-base hover:text-[#39251A] cursor-pointer">
+                {c.label}
+              </p>
+            </motion.div>
           ))}
-        </section>
+        </motion.section>
  
         <section className="relative overflow-hidden rounded-lg h-[420px] bg-gray-100">
           <div className="relative w-full h-full">
             {Array.from({ length: totalSlides }).map((_, index) => (
               <div 
                 key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute inset-0 transition-opacity duration-300 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
                 style={{
                   backgroundImage: `url(/images/slider-${index + 1}.png)`,
                   backgroundSize: 'cover',
@@ -89,7 +141,7 @@ const Home = () => {
           </div>
         </section>
       </div>
-    </main>
+    </motion.main>
   );
 };
 
