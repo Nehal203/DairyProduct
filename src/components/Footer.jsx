@@ -126,6 +126,7 @@ const Footer = () => {
                 </motion.span>
                 <div>
                   <p className="text-lg font-semibold text-white">Address:</p>
+<<<<<<< HEAD
                   <a
                     href="https://www.google.com/maps?q=Ahmedabad"
                     target="_blank"
@@ -134,6 +135,9 @@ const Footer = () => {
                   >
                     Ahmedabad
                   </a>
+=======
+                  <p className="text-sm opacity-90">Ahmedabad</p>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                 </div>
               </div>
               <div className="mt-5 flex items-center gap-3">
@@ -147,7 +151,11 @@ const Footer = () => {
                   </svg>
                 </motion.span>
                 <div>
+<<<<<<< HEAD
                   <a href="tel:+123456780123" className="text-lg font-semibold text-white hover:underline">+123456780123</a>
+=======
+                  <p className="text-lg font-semibold text-white">+123456780123</p>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                   <p className="text-sm opacity-90">Got Questions? Call us 24/7</p>
                 </div>
               </div>
@@ -167,6 +175,7 @@ const Footer = () => {
                 </motion.span>
                 <div>
                   <p className="text-lg font-semibold text-white">Email:</p>
+<<<<<<< HEAD
                   <a href="mailto:info@example.com" className="text-sm opacity-90 hover:underline">info@example.com</a>
                 </div>
               </div>
@@ -182,13 +191,27 @@ const Footer = () => {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`Open ${s.href}`}
+=======
+                  <p className="text-sm opacity-90">info@example.com</p>
+                </div>
+              </div>
+              <div className="mt-5 flex items-center gap-4">
+                {[<FaFacebook />, <FaTwitter />, <FaInstagram />].map((key, idx) => (
+                  <motion.span 
+                    key={idx} 
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                     className="inline-flex h-9 w-9 items-center text-white justify-center rounded-full bg-[#5a3a29] cursor-pointer"
                     whileHover={{ scale: 1.1, backgroundColor: '#6b4733' }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                   >
+<<<<<<< HEAD
                     {s.icon}
                   </motion.a>
+=======
+                    {key}
+                  </motion.span>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                 ))}
               </div>
             </div>

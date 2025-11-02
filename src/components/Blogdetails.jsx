@@ -69,9 +69,15 @@ const Sidebar = () => {
       >
         <h4 className="font-semibold text-2xl mb-4">Follow Us</h4>
         <div className="flex gap-3">
+<<<<<<< HEAD
           <a href="" target="_blank" rel="noreferrer noopener" aria-label="Instagram" className="w-9 h-9 rounded-full bg-[#FACC15] text-white grid place-items-center"><FaInstagram /></a>
           <a href="" target="_blank" rel="noreferrer noopener" aria-label="Facebook" className="w-9 h-9 rounded-full bg-[#FACC15] text-white grid place-items-center"><FaFacebook /></a>
           <a href="" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn" className="w-9 h-9 rounded-full bg-[#FACC15] text-white grid place-items-center"><FaLinkedin /></a>
+=======
+          <a className="w-9 h-9 rounded-full bg-[#FACC15] text-white grid place-items-center"><FaInstagram /></a>
+          <a className="w-9 h-9 rounded-full bg-[#FACC15] text-white grid place-items-center"><FaFacebook /></a>
+          <a className="w-9 h-9 rounded-full bg-[#FACC15] text-white grid place-items-center"><FaLinkedin /></a>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
         </div>
       </motion.div>
       <motion.div 
@@ -297,6 +303,7 @@ const Blogdetails = () => {
                       ))}
                     </motion.div>
                     <motion.div className="flex gap-2">
+<<<<<<< HEAD
                       {[
                         { href: 'https://www.linkedin.com/company/yourcompany', icon: <FaLinkedin /> },
                         { href: 'https://instagram.com/youraccount', icon: <FaInstagram /> },
@@ -308,6 +315,11 @@ const Blogdetails = () => {
                           target="_blank"
                           rel="noreferrer noopener"
                           aria-label={`Open ${s.href}`}
+=======
+                      {[<FaLinkedin/>,<FaInstagram />,<FaFacebook />].map((s, i) => (
+                        <motion.span 
+                          key={s} 
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                           className="w-9 h-9 rounded-full text-white bg-[#FACC15] grid place-items-center cursor-pointer"
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
@@ -322,8 +334,13 @@ const Blogdetails = () => {
                             backgroundColor: '#39251A'
                           }}
                         >
+<<<<<<< HEAD
                           {s.icon}
                         </motion.a>
+=======
+                          {s}
+                        </motion.span>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                       ))}
                     </motion.div>
                   </div>

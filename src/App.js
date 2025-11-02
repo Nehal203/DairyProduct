@@ -3,7 +3,11 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import About from './components/About';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+=======
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 import { CartProvider } from './contexts/CartContext';
 import Front from './components/Front';
 import Blog from './components/Blog';
@@ -15,6 +19,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+<<<<<<< HEAD
 import Wishlist from './components/Wishlist';
 import { useEffect } from 'react';
 
@@ -26,13 +31,18 @@ function ScrollToTop() {
   }, [pathname, hash]);
   return null;
 }
+=======
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 
 function App() {
   return (
     <div>
       <CartProvider>
         <Router>
+<<<<<<< HEAD
           <ScrollToTop />
+=======
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
           <Navbar />
           <div className="min-h-screen">
             <Routes>
@@ -47,7 +57,10 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/checkout" element={<Checkout />} />
+<<<<<<< HEAD
           <Route path="/wishlist" element={<Wishlist />} />
+=======
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
             </Routes>
           </div>
           <Footer />

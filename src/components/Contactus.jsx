@@ -137,7 +137,11 @@ const Contactus = () => {
                                     </motion.div>
                                     <motion.div>
                                         <h4 className="font-semibold">Phone</h4>
+<<<<<<< HEAD
                                         <a href="tel:+15550000000" className="text-gray-600 hover:underline">+1 (555) 000-0000</a>
+=======
+                                        <p className="text-gray-600">+1 (555) 000-0000</p>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     </motion.div>
                                 </motion.div>
                                 <motion.div
@@ -154,7 +158,11 @@ const Contactus = () => {
                                     </motion.div>
                                     <div>
                                         <h4 className="font-semibold">Email</h4>
+<<<<<<< HEAD
                                         <a href="mailto:info@dairyfarm.com" className="text-gray-600 hover:underline">info@dairyfarm.com</a>
+=======
+                                        <p className="text-gray-600">info@dairyfarm.com</p>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     </div>
                                 </motion.div>
                                 <motion.div
@@ -171,6 +179,7 @@ const Contactus = () => {
                                     </motion.div>
                                     <div>
                                         <h4 className="font-semibold">Location</h4>
+<<<<<<< HEAD
                                         <a
                                             href="https://www.google.com/maps?q=123+Farm+Street,+Countryside,+12345"
                                             target="_blank"
@@ -179,6 +188,9 @@ const Contactus = () => {
                                         >
                                             123 Farm Street, Countryside, 12345
                                         </a>
+=======
+                                        <p className="text-gray-600">123 Farm Street, Countryside, 12345</p>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     </div>
                                 </motion.div>
                             </motion.div>

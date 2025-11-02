@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaLock, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcApplePay } from 'react-icons/fa';
 import { BsCheck2 } from 'react-icons/bs';
 import { useCart } from '../contexts/CartContext';
 import { Link } from 'react-router-dom';
+=======
+import { FaArrowLeft, FaLock, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcApplePay } from 'react-icons/fa';
+import { BsCheck2 } from 'react-icons/bs';
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 
 const Checkout = () => {
     const [activeTab, setActiveTab] = useState('shipping');
     const [paymentMethod, setPaymentMethod] = useState('credit');
     const [sameAsShipping, setSameAsShipping] = useState(true);
+<<<<<<< HEAD
     const { cartItems, cartTotal, clearCart } = useCart();
     const shipping = cartItems.length > 0 ? 5.00 : 0;
     const total = cartTotal + shipping;
@@ -21,11 +27,26 @@ const Checkout = () => {
                 </div>
             </motion.div>
         <motion.div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+=======
+
+    return (
+        <section className="pt-28">
+            <div className="w-full bg-[#39251A] text-white">
+                <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
+                    <h3 className="text-2xl tracking-wide">Checkout</h3>
+                </div>
+            </div>
+        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
             <div className="max-w-6xl mx-auto">
 
                 <div className="flex flex-col lg:flex-row gap-8">
                     <div className="lg:w-2/3">
+<<<<<<< HEAD
                         <motion.div className="bg-white rounded-lg shadow-sm p-6 mb-6" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+=======
+                        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                             <h2 className="text-2xl font-bold text-gray-900 mb-6">Checkout</h2>
                             
                             <div className="flex justify-between items-center mb-8">
@@ -52,7 +73,11 @@ const Checkout = () => {
                             </div>
 
                             {activeTab === 'shipping' && (
+<<<<<<< HEAD
                                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+=======
+                                <div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     <h3 className="text-lg font-medium mb-4">Shipping Information</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
@@ -104,9 +129,15 @@ const Checkout = () => {
                                         </label>
                                     </div>
                                     <div className="flex justify-between">
+<<<<<<< HEAD
                                         <Link to="/cart" className="flex items-center text-[#FACC15] hover:text-blue-800">
                                             <FaArrowLeft className="mr-2" /> Return to cart
                                         </Link>
+=======
+                                        <button className="flex items-center text-[#FACC15] hover:text-blue-800">
+                                            <FaArrowLeft className="mr-2" /> Return to cart
+                                        </button>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                         <button 
                                             onClick={() => setActiveTab('payment')}
                                             className="bg-[#39251A] text-white px-6 py-2 rounded-md hover:bg-blue-700"
@@ -114,11 +145,19 @@ const Checkout = () => {
                                             Continue to Payment
                                         </button>
                                     </div>
+<<<<<<< HEAD
                                 </motion.div>
                             )}
 
                             {activeTab === 'payment' && (
                                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+=======
+                                </div>
+                            )}
+
+                            {activeTab === 'payment' && (
+                                <div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     <h3 className="text-lg font-medium mb-4">Payment Method</h3>
                                     
                                     <div className="space-y-4 mb-6">
@@ -218,16 +257,28 @@ const Checkout = () => {
                                         </button>
                                         <button 
                                             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
+<<<<<<< HEAD
                                             onClick={() => { setActiveTab('confirmation'); clearCart(); }}
+=======
+                                            onClick={() => setActiveTab('confirmation')}
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                         >
                                             Complete Order
                                         </button>
                                     </div>
+<<<<<<< HEAD
                                 </motion.div>
                             )}
 
                             {activeTab === 'confirmation' && (
                                 <motion.div className="text-center py-12" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
+=======
+                                </div>
+                            )}
+
+                            {activeTab === 'confirmation' && (
+                                <div className="text-center py-12">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                         <BsCheck2 className="text-green-600 text-3xl" />
                                     </div>
@@ -237,6 +288,7 @@ const Checkout = () => {
                                     <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
                                         Continue Shopping
                                     </button>
+<<<<<<< HEAD
                                 </motion.div>
                             )}
                         </motion.div>
@@ -264,34 +316,106 @@ const Checkout = () => {
                               {cartItems.length === 0 && (
                                 <p className="text-sm text-gray-500">No items in cart.</p>
                               )}
+=======
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="lg:w-1/3">
+                        <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                            <h3 className="text-lg font-medium text-gray-900 mb-6">Order Summary</h3>
+                            
+                            <div className="space-y-4 mb-6">
+                                <div className="flex items-center">
+                                    <div className="w-16 h-16 bg-gray-100 rounded-md overflow-hidden mr-4">
+                                        <img 
+                                            src="" 
+                                            alt="Product" 
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className="text-sm font-medium text-gray-900">Milk</h4>
+                                        <p className="text-sm text-gray-500">Milk</p>
+                                        <div className="flex justify-between items-center mt-1">
+                                            <span className="text-sm text-gray-900">$150.00</span>
+                                            <span className="text-sm text-gray-500">x1</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center">
+                                    <div className="w-16 h-16 bg-gray-100 rounded-md overflow-hidden mr-4">
+                                        <img 
+                                            src="" 
+                                            alt="Product" 
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className="text-sm font-medium text-gray-900">Milk</h4>
+                                        <p className="text-sm text-gray-500">Milk</p>
+                                        <div className="flex justify-between items-center mt-1">
+                                            <span className="text-sm text-gray-900">$180.00</span>
+                                            <span className="text-sm text-gray-500">x1</span>
+                                        </div>
+                                    </div>
+                                </div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                             </div>
 
                             <div className="border-t border-b border-gray-200 py-4 space-y-3 mb-6">
                                 <div className="flex justify-between">
                                     <span className="text-sm text-gray-600">Subtotal</span>
+<<<<<<< HEAD
                                     <span className="text-sm font-medium text-gray-900">${cartTotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-sm text-gray-600">Shipping</span>
                                     <span className="text-sm font-medium text-gray-900">${shipping.toFixed(2)}</span>
+=======
+                                    <span className="text-sm font-medium text-gray-900">$330.00</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-sm text-gray-600">Shipping</span>
+                                    <span className="text-sm font-medium text-gray-900">$0.00</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-sm text-gray-600">Tax</span>
+                                    <span className="text-sm font-medium text-gray-900">$26.40</span>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                 </div>
                             </div>
 
                             <div className="flex justify-between items-center mb-6">
                                 <span className="text-lg font-bold text-gray-900">Total</span>
+<<<<<<< HEAD
                                 <span className="text-lg font-bold text-gray-900">${total.toFixed(2)}</span>
+=======
+                                <span className="text-lg font-bold text-gray-900">$356.40</span>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                             </div>
 
                             <div className="text-xs text-gray-500">
                                 <p className="mb-2">By placing your order, you agree to our <a href="#" className="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>.</p>
                                 <p>Need help? <a href="#" className="text-blue-600 hover:underline">Contact us</a></p>
                             </div>
+<<<<<<< HEAD
                         </motion.div>
                     </div>
                 </div>
             </div>
         </motion.div>
         </motion.section>
+=======
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
     );
 };
 

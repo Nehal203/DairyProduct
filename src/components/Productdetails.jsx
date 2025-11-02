@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { productItems } from './Productitem';
+<<<<<<< HEAD
 import { FaStar, FaStarHalfAlt, FaRegStar, FaShoppingCart, FaShare, FaLeaf, FaWeight, FaTag, FaBox } from 'react-icons/fa';
 import { MdOutlineLocalShipping, MdOutlinePayment } from 'react-icons/md';
 import { useCart } from '../contexts/CartContext';
 import { motion } from 'framer-motion';
+=======
+import { FaStar, FaStarHalfAlt, FaRegStar, FaShoppingCart, FaHeart, FaShare, FaLeaf, FaWeight, FaTag, FaBox } from 'react-icons/fa';
+import { MdOutlineLocalShipping, MdOutlinePayment } from 'react-icons/md';
+import { useCart } from '../contexts/CartContext';
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 
 const Productdetails = () => {
     const { id } = useParams();
@@ -35,7 +41,11 @@ const Productdetails = () => {
                     img: product.img,
                     quantity: quantity
                 });
+<<<<<<< HEAD
                 navigate('');
+=======
+                
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
             
             } catch (error) {
                 console.error('Error adding to cart:', error);
@@ -90,6 +100,7 @@ const Productdetails = () => {
     };
 
     return (
+<<<<<<< HEAD
         <motion.section className="bg-gray-50 min-h-screen pt-28" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
             <motion.div className="w-full bg-[#39251A] text-white" initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.4 }}>
                 <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
@@ -99,6 +110,17 @@ const Productdetails = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <motion.div className="bg-white rounded-2xl shadow-sm overflow-hidden" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+=======
+        <div className="bg-gray-50 min-h-screen pt-28">
+            <div className="w-full bg-[#39251A] text-white">
+                <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
+                    <h3 className="text-2xl tracking-wide">{product.title}</h3>
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
                         <div className="space-y-4">
                             <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: product.bgColor }}>
@@ -151,9 +173,13 @@ const Productdetails = () => {
                                         }}
                                         className={`p-2 rounded-full hover:bg-gray-100 ${isFavorite ? 'text-red-500' : 'text-gray-500'}`}
                                     >
+<<<<<<< HEAD
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                                           <path d="M11.645 20.91 3.28 12.545a6.5 6.5 0 1 1 9.193-9.192l.282.28.282-.28a6.5 6.5 0 1 1 9.193 9.193L12.355 20.91a.5.5 0 0 1-.71 0Z" />
                                         </svg>
+=======
+                                        <FaHeart className={isFavorite ? 'fill-current' : ''} />
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     </button>
                                     <button className="p-2 rounded-full hover:bg-gray-100">
                                         <FaShare className="text-gray-500 hover:text-green-500" />
@@ -394,11 +420,16 @@ const Productdetails = () => {
                             </div>
                         )}
                     </div>
+<<<<<<< HEAD
                 </motion.div>
+=======
+                </div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 
                 <div className="mt-16">
                     <h2 className="text-2xl font-bold text-gray-900 mb-8">Related Products</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<<<<<<< HEAD
                         {relatedProducts.map((p, idx) => (
                             <motion.div 
                                 key={p.id} 
@@ -407,13 +438,21 @@ const Productdetails = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.35, delay: idx * 0.05 }}
                             >
+=======
+                        {relatedProducts.map(p => (
+                            <div key={p.id} className="group bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                 <div className="relative h-48 rounded-xl overflow-hidden mb-4" style={{ backgroundColor: p.bgColor }}>
                                     <div className="absolute inset-0 flex items-center justify-center p-4">
                                         <img src={p.img} alt={p.title} className="max-h-full max-w-full object-contain" />
                                     </div>
                                 </div>
                                 <div className="p-2">
+<<<<<<< HEAD
                                     <h3 className="font-medium text-gray-900 group-hover:text-green-600 transition relative">
+=======
+                                    <h3 className="font-medium text-gray-900 group-hover:text-green-600 transition">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                         <Link to={`/product/${p.id}`}>
                                             <span aria-hidden="true" className="absolute inset-0" />
                                             {p.title}
@@ -428,12 +467,20 @@ const Productdetails = () => {
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
                             </motion.div>
+=======
+                            </div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                         ))}
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </motion.section>
+=======
+        </div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
     );
 };
 

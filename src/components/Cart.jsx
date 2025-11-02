@@ -1,7 +1,10 @@
 import { FiTrash2, FiPlus, FiMinus, FiShoppingBag } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+<<<<<<< HEAD
 import { motion } from 'framer-motion';
+=======
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 
 const Cart = () => {
     const { 
@@ -17,8 +20,13 @@ const Cart = () => {
 
     if (cartItems.length === 0) {
         return (
+<<<<<<< HEAD
             <motion.div className="min-h-screen bg-gray-50 pt-28 pb-12 px-4 sm:px-6 lg:px-8" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                 <motion.div className="max-w-7xl mx-auto text-center py-12" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }}>
+=======
+            <div className="min-h-screen bg-gray-50 pt-28 pb-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto text-center py-12">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                     <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-4">
                         <FiShoppingBag className="w-8 h-8 text-gray-400" />
                     </div>
@@ -30,18 +38,32 @@ const Cart = () => {
                     >
                         Continue Shopping
                     </Link>
+<<<<<<< HEAD
                 </motion.div>
             </motion.div>
+=======
+                </div>
+            </div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
         );
     }
 
     return (
+<<<<<<< HEAD
         <motion.section id="cart" className="pt-28" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
              <motion.div className="w-full bg-[#39251A] text-white" initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.4 }}>
                 <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
                     <h3 className="text-2xl tracking-wide">Cart</h3>
                 </div>
             </motion.div>
+=======
+        <section id="cart" className="pt-28">
+             <div className="w-full bg-[#39251A] text-white">
+                <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
+                    <h3 className="text-2xl tracking-wide">Cart</h3>
+                </div>
+            </div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
         
         <div className="min-h-screen bg-gray-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
@@ -65,6 +87,7 @@ const Cart = () => {
                                 </div>
                             </div>
 
+<<<<<<< HEAD
                             {cartItems.map((item, idx) => (
                                 <motion.div 
                                   key={item.id} 
@@ -73,6 +96,10 @@ const Cart = () => {
                                   animate={{ opacity: 1, y: 0 }}
                                   transition={{ duration: 0.35, delay: idx * 0.05 }}
                                 >
+=======
+                            {cartItems.map((item) => (
+                                <div key={item.id} className="p-4 border-b last:border-b-0 flex flex-col md:grid md:grid-cols-12 gap-4">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     <div className="flex items-center col-span-5">
                                     <div className="flex-shrink-0 h-20 w-20 bg-gray-100 rounded-md overflow-hidden">
                                         <img
@@ -124,7 +151,11 @@ const Cart = () => {
                                             <FiTrash2 size={18} />
                                         </button>
                                     </div>
+<<<<<<< HEAD
                                 </motion.div>
+=======
+                                </div>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                             ))}
                         </div>
 
@@ -189,7 +220,11 @@ const Cart = () => {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         </motion.section>
+=======
+        </section>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
     );
 };
 

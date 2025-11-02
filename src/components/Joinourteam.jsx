@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
+=======
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 import { motion } from 'framer-motion';
 
 const container = {
@@ -68,6 +71,7 @@ const Joinourteam = () => {
     }
   ];
 
+<<<<<<< HEAD
   const testimonials = [
     {
       text:
@@ -108,6 +112,8 @@ const Joinourteam = () => {
   const handlePrev = () => setTIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
   const handleNext = () => setTIndex((i) => (i + 1) % testimonials.length);
 
+=======
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
   return (
     <motion.section
       id="joinourteam"
@@ -278,12 +284,21 @@ const Joinourteam = () => {
             <div className="relative">
               <div className="backdrop-blur-md bg-white/10 rounded-3xl p-6 md:p-20 border border-white/20 shadow-xl">
                 <div className="flex items-center gap-2 text-amber-300">
+<<<<<<< HEAD
                   {Array.from({ length: activeTestimonial.rating }).map((_, i) => (
                     <svg
                       key={`star-${i}`}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
+=======
+                  {[...Array(4)].map((_, i) => (
+                    <svg 
+                      key={i} 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      viewBox="0 0 24 24" 
+                      fill="currentColor" 
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                       className="w-5 h-5"
                     >
                       <path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z" />
@@ -291,6 +306,7 @@ const Joinourteam = () => {
                   ))}
                 </div>
                 <p className="text-white/90 mt-4 text-sm leading-6">
+<<<<<<< HEAD
                   {activeTestimonial.text}
                 </p>
                 <div className="mt-6 flex items-center justify-between">
@@ -317,11 +333,40 @@ const Joinourteam = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
+=======
+                  "Lorem ipsum dolor sit amet consectetur. Pellentesque lacus a duis viverra congue massa nisi arcu.
+                  Ac maecenas orci auctor gravida lacus mi sit. Ac maecenas orci auctor gravida lacus mi sit."
+                </p>
+                <div className="mt-6 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <img 
+                      className="w-10 h-10 rounded-full object-cover" 
+                      src="/images/user2.png" 
+                      alt="Floyd Miles" 
+                    />
+                    <div>
+                      <p className="text-white font-semibold text-sm">Floyd Miles</p>
+                      <p className="text-white/70 text-xs">Dairy Enthusiast</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button 
+                      className="w-9 h-9 inline-flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white"
+                      aria-label="Previous testimonial"
+                    >
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                         className="w-4 h-4"
                       >
                         <path d="m15 18-6-6 6-6" />
                       </svg>
                     </button>
+<<<<<<< HEAD
                     <button
                       onClick={handleNext}
                       className="w-9 h-9 inline-flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white"
@@ -333,6 +378,18 @@ const Joinourteam = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
+=======
+                    <button 
+                      className="w-9 h-9 inline-flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white"
+                      aria-label="Next testimonial"
+                    >
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                         className="w-4 h-4"
                       >
                         <path d="m9 6 6 6-6 6" />

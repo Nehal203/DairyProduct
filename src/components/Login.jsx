@@ -1,4 +1,5 @@
 import { FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
+<<<<<<< HEAD
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,6 +20,20 @@ const Login = () => {
             </motion.div>
             <motion.div className='min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8' initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                 <motion.div className="max-w-md w-full space-y-8 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg z-10" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+=======
+
+const Login = () => {
+    return (
+        <section id="login" className='py-28'>
+
+            <div className="w-full bg-[#39251A] text-white">
+                <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
+                    <h3 className="text-2xl tracking-wide">Login</h3>
+                </div>
+            </div>
+            <div className='min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8'>
+                <div className="max-w-md w-full space-y-8 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg z-10">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                     <div className="text-center">
                         <img src="/images/logo1.png" className="w-60 h-20 mx-auto" alt="" />
                         <p className="mt-2 text-sm text-gray-600">
@@ -26,7 +41,11 @@ const Login = () => {
                         </p>
                     </div>
 
+<<<<<<< HEAD
                     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+=======
+                    <form className="mt-8 space-y-6">
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
                                 <label htmlFor="email-address" className="sr-only">Email address</label>
@@ -125,9 +144,15 @@ const Login = () => {
                             </a>
                         </p>
                     </div>
+<<<<<<< HEAD
                 </motion.div>
             </motion.div>
         </motion.section>
+=======
+                </div>
+            </div>
+        </section>
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
     );
 };
 

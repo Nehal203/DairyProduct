@@ -16,8 +16,13 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 6;
 
+<<<<<<< HEAD
   const handleCategoryClick = (label) => {
     navigate(`/product?category=${encodeURIComponent(label)}`);
+=======
+  const handleCategoryClick = (path) => {
+    navigate(`/${path}`);
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
   };
 
   useEffect(() => {
@@ -70,7 +75,11 @@ const Home = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex flex-col text-black items-center text-center hover:scale-105 transition-transform duration-200"
+<<<<<<< HEAD
               onClick={() => handleCategoryClick(c.label)}
+=======
+              onClick={() => handleCategoryClick(c.path)}
+>>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
             >
               <div className="cursor-pointer w-28 h-28 rounded-full border-2 border-black flex items-center justify-center bg-white hover:shadow-lg">
                 <img 
