@@ -1,20 +1,12 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { FiShoppingCart } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-=======
-import React, { useState } from 'react';
-import { useCart } from '../contexts/CartContext';
-import { FiShoppingCart } from 'react-icons/fi';
-import { motion } from 'framer-motion';
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 
 const categories = ['All Product', 'Milk', 'Ice Cream', 'Sweet', 'Baby Nutrition', 'Beverages'];
 
 const allProducts = [
-<<<<<<< HEAD
   { id: 1, title: 'Mixed Dryfruit sweets', price: 999, oldPrice: 1299, rating: 5, img: '/images/dryfruits.png', badge: '-17%', category: 'Sweet' },
   { id: 2, title: 'Creamy Cheese cubs', price: 299, rating: 4, img: '/images/cheese.jpg', category: 'Milk' },
   { id: 3, title: 'Ice Cream cone', price: 199, oldPrice: 299, rating: 4, img: '/images/ice-cream.jpg', category: 'Ice Cream' },
@@ -62,24 +54,6 @@ const Best = () => {
       return next;
     });
   };
-
-=======
-  { id: 1, title: 'Mixed Dryfruit sweets', price: 999, oldPrice: 1299, rating: 5, img: '/images/dryfruits.png', badge: '-17%' },
-  { id: 2, title: 'Creamy Cheese cubs', price: 299, rating: 4, img: '/images/cheese.jpg' },
-  { id: 3, title: 'Ice Cream cone', price: 199, oldPrice: 299, rating: 4, img: '/images/ice-cream.jpg' },
-  { id: 4, title: 'Cow Pure Milk', price: 54, rating: 5, img: '/images/milk.jpg', badge: '-17%' },
-];
-
-
-
-const Best = () => {
-  const [active, setActive] = useState(categories[0]);
-  const { addToCart } = useCart();
-  const products = active === 'All Product' 
-    ? allProducts 
-    : allProducts.filter(p => p.category === active);
-
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -113,11 +87,7 @@ const Best = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900">Best Sellers</h2>
 
-<<<<<<< HEAD
         <motion.div
-=======
-        <motion.div 
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
           className="mt-6 flex flex-wrap items-center justify-center gap-6 text-md"
           initial="hidden"
           animate="show"
@@ -136,27 +106,16 @@ const Best = () => {
             </motion.button>
           ))}
         </motion.div>
-<<<<<<< HEAD
         <motion.div
           key={`${active}-${page}`}
-=======
- 
-        <motion.div 
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
           className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           variants={container}
           initial="hidden"
           animate="show"
         >
-<<<<<<< HEAD
           {pagedProducts.map((p) => (
             <motion.div
               key={p.id}
-=======
-          {products.map((p) => (
-            <motion.div 
-              key={p.id} 
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
               className="bg-white rounded-2xl p-0 shadow-sm hover:shadow-md transition"
               variants={item}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
@@ -179,11 +138,7 @@ const Best = () => {
                       <span className="text-sm text-gray-500 line-through">${p.oldPrice}</span>
                     )}
                   </div>
-<<<<<<< HEAD
                   <button
-=======
-                  <button 
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                     onClick={() => handleAddToCart(p)}
                     className="flex items-center justify-center w-10 h-10 rounded-full bg-[#39251A] text-white hover:bg-[#2a1c14] transition-colors"
                     aria-label="Add to cart"
@@ -196,7 +151,6 @@ const Best = () => {
                     {'★★★★★'.slice(0, p.rating)}
                     <span className="ml-1 text-gray-400">({p.rating})</span>
                   </div>
-<<<<<<< HEAD
                   <button
                     onClick={() => toggleWishlist(p)}
                     className={`${isInWishlist(p.id) ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
@@ -207,11 +161,6 @@ const Best = () => {
                     </svg>
                   </button>
                 </div>
-=======
-                  <button className="text-gray-500 hover:text-red-500" aria-label="favorite">♡</button>
-                </div>
-                {/* <h3 className="mt-1 text-gray-800 font-semibold text-md line-clamp-1">{p.title}</h3> */}
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
               </div>
 
               {/* <div className="mt-4 mb-10 flex items-center gap-20 justify-between  ">
@@ -226,7 +175,6 @@ const Best = () => {
             </motion.div>
           ))}
         </motion.div>
-<<<<<<< HEAD
         
         <div className="mt-6 flex items-center justify-center gap-2">
           {Array.from({ length: totalPages }).map((_, i) => (
@@ -238,8 +186,6 @@ const Best = () => {
             />
           ))}
         </div>
-=======
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
       </div>
     </section>
   );

@@ -193,7 +193,7 @@ const About = () => {
                         variants={container}
                     >
                         <motion.a
-                            href="#"
+                            href="/blog"
                             className="group inline-flex items-center bg-[#E5C96C] hover:bg-[#18555C] hover:text-white text-[#18555C] px-5 py-2 rounded-md text-sm font-semibold"
                             variants={item}
                             whileHover={{ scale: 1.05 }}
@@ -247,7 +247,7 @@ const About = () => {
                             <p className="text-white mt-4 max-w-2xl">We follow a ‘Farm-to-Home’ philosophy, meaning our milk goes <br />directly from healthy, well-fed cows to your doorstep without<br /> unnecessary processing or delay. Our cows are raised with <br />compassion</p>
                         </div>
                         <motion.a
-                            href="#"
+                            href="/contact"
                             className="group inline-flex items-center bg-[#E5C96C] hover:bg-white text-[#18555C] px-5 py-2 rounded-md text-sm font-semibold"
                             variants={item}
                             whileHover={{ scale: 1.05 }}

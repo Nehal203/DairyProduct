@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const categories = [
-  { label: 'Milk & Dairies', path: 'milk-dairies', icon: '/images/dairy.png' },
+  { label: 'Milk & Dairies', path: 'milk-dairies', icon: 'images/dairy.png' },
   { label: 'Sweets', path: 'sweets', icon: '/images/sweets.png' },
   { label: 'Ice Cream', path: 'ice-cream', icon: '/images/icecream.png' },
   { label: 'Beverage', path: 'beverage', icon: '/images/beverages.png' },
@@ -15,14 +15,8 @@ const Home = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 6;
-
-<<<<<<< HEAD
   const handleCategoryClick = (label) => {
     navigate(`/product?category=${encodeURIComponent(label)}`);
-=======
-  const handleCategoryClick = (path) => {
-    navigate(`/${path}`);
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
   };
 
   useEffect(() => {
@@ -75,11 +69,7 @@ const Home = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex flex-col text-black items-center text-center hover:scale-105 transition-transform duration-200"
-<<<<<<< HEAD
               onClick={() => handleCategoryClick(c.label)}
-=======
-              onClick={() => handleCategoryClick(c.path)}
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
             >
               <div className="cursor-pointer w-28 h-28 rounded-full border-2 border-black flex items-center justify-center bg-white hover:shadow-lg">
                 <img 
@@ -123,7 +113,7 @@ const Home = () => {
                 massa nisi orci. Ac maecenas orci gravida lacus mi orci.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
-                <a href="" className="group inline-flex items-center bg-[#E5C96C] hover:bg-white text-[#18555C] px-5 py-2 rounded-md text-sm font-semibold transition">
+                <a href="/contact" className="group inline-flex items-center bg-[#E5C96C] hover:bg-white text-[#18555C] px-5 py-2 rounded-md text-sm font-semibold transition">
                   Visit Our Farm
                   <span className="ml-3 inline-flex items-center justify-center w-7 h-7 rounded bg-[#18555C] group-hover:text-[#18555C] group-hover:bg-[#E5C96C] text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">

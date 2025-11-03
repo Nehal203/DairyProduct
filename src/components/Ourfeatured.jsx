@@ -361,7 +361,7 @@ const Ourfeatured = () => {
 
 
               <motion.a
-                href="#"
+                href="/product"
                 className="group inline-flex items-center bg-[#E5C96C] hover:bg-white text-[#18555C] px-5 py-2 rounded-md text-sm font-bold transition"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

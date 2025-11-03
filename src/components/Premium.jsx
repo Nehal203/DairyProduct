@@ -1,11 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from '../contexts/CartContext';
-<<<<<<< HEAD
 import { FiShoppingCart } from 'react-icons/fi';
-=======
-import { FiShoppingCart, FiHeart } from 'react-icons/fi';
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
+ 
 
 const premiumProducts = [
   { id: 1, title: 'Fresh organic Cow Milk 500gm pack', price: 68.85, oldPrice: 72.8, rating: 4.0, img: '/images/product1.png', tag: 'Hot', category: 'Snack' },
@@ -45,7 +42,6 @@ const TagChip = ({ tag }) => {
 
 const Card = ({ p, index }) => {
   const { addToCart } = useCart();
-<<<<<<< HEAD
   const [favs, setFavs] = React.useState([]);
   React.useEffect(() => {
     try {
@@ -65,11 +61,6 @@ const Card = ({ p, index }) => {
       return next;
     });
   };
-
-=======
-  const [isFavorite, setIsFavorite] = React.useState(false);
-  
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
   const cardVariants = {
     offscreen: {
       y: 50,
@@ -86,20 +77,10 @@ const Card = ({ p, index }) => {
       }
     }
   };
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
   const buttonHover = {
     scale: 1.05,
     transition: { duration: 0.2 }
   };
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
   const buttonTap = {
     scale: 0.95
   };
@@ -139,24 +120,15 @@ const Card = ({ p, index }) => {
             <span className="ml-1 text-gray-400">({p.rating})</span>
           </div>
           <motion.button 
-<<<<<<< HEAD
             onClick={toggleWishlist}
             className={`${isInWishlist(p.id) ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
-=======
-            onClick={() => setIsFavorite(!isFavorite)}
-            className={`text-gray-500 hover:text-red-500 ${isFavorite ? 'text-red-500' : ''}`}
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
             aria-label="favorite"
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
           >
-<<<<<<< HEAD
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
               <path d="M11.645 20.91 3.28 12.545a6.5 6.5 0 1 1 9.193-9.192l.282.28.282-.28a6.5 6.5 0 1 1 9.193 9.193L12.355 20.91a.5.5 0 0 1-.71 0Z" />
             </svg>
-=======
-            <FiHeart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
           </motion.button>
         </div>
 

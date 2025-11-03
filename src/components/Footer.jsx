@@ -75,24 +75,28 @@ const Footer = () => {
               <img src="/images/logonew.png" alt="logo" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full object-cover shrink-0" />
               <div className="leading-tight">
                 <p className="text-2xl sm:text-2xl lg:text-3xl font-semibold text-white">Ranny Dairy.</p>
-                {/* <p className="text-sm opacity-80 mt-1">Freshness you can trust</p> */}
               </div>
             </motion.div>
 
             <div>
               <p className="text-lg font-semibold text-white">Quick Links</p>
               <ul className="mt-4 space-y-2 text-sm">
-                {['Home', 'About Us', 'Blog', 'Contact Us'].map((item, idx) => (
-                <motion.li 
-                  key={idx}
-                  whileHover={{ x: 5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
-                  <a href={`/${item.toLowerCase().replace(' ', '-')}`} className="hover:underline block py-1">
-                    {item}
-                  </a>
-                </motion.li>
-              ))}
+                {[
+                  { name: 'Home', path: '/' },
+                  { name: 'About Us', path: '/about' },
+                  { name: 'Blog', path: '/blog' },
+                  { name: 'Contact Us', path: '/contact' }
+                ].map((item, idx) => (
+                  <motion.li 
+                    key={idx}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <a href={item.path} className="hover:underline block py-1">
+                      {item.name}
+                    </a>
+                  </motion.li>
+                ))}
               </ul>
             </div>
 
@@ -126,7 +130,6 @@ const Footer = () => {
                 </motion.span>
                 <div>
                   <p className="text-lg font-semibold text-white">Address:</p>
-<<<<<<< HEAD
                   <a
                     href="https://www.google.com/maps?q=Ahmedabad"
                     target="_blank"
@@ -135,9 +138,6 @@ const Footer = () => {
                   >
                     Ahmedabad
                   </a>
-=======
-                  <p className="text-sm opacity-90">Ahmedabad</p>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                 </div>
               </div>
               <div className="mt-5 flex items-center gap-3">
@@ -151,11 +151,7 @@ const Footer = () => {
                   </svg>
                 </motion.span>
                 <div>
-<<<<<<< HEAD
                   <a href="tel:+123456780123" className="text-lg font-semibold text-white hover:underline">+123456780123</a>
-=======
-                  <p className="text-lg font-semibold text-white">+123456780123</p>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                   <p className="text-sm opacity-90">Got Questions? Call us 24/7</p>
                 </div>
               </div>
@@ -175,7 +171,6 @@ const Footer = () => {
                 </motion.span>
                 <div>
                   <p className="text-lg font-semibold text-white">Email:</p>
-<<<<<<< HEAD
                   <a href="mailto:info@example.com" className="text-sm opacity-90 hover:underline">info@example.com</a>
                 </div>
               </div>
@@ -191,27 +186,13 @@ const Footer = () => {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`Open ${s.href}`}
-=======
-                  <p className="text-sm opacity-90">info@example.com</p>
-                </div>
-              </div>
-              <div className="mt-5 flex items-center gap-4">
-                {[<FaFacebook />, <FaTwitter />, <FaInstagram />].map((key, idx) => (
-                  <motion.span 
-                    key={idx} 
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                     className="inline-flex h-9 w-9 items-center text-white justify-center rounded-full bg-[#5a3a29] cursor-pointer"
                     whileHover={{ scale: 1.1, backgroundColor: '#6b4733' }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                   >
-<<<<<<< HEAD
                     {s.icon}
                   </motion.a>
-=======
-                    {key}
-                  </motion.span>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                 ))}
               </div>
             </div>

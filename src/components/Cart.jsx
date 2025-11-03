@@ -1,10 +1,7 @@
 import { FiTrash2, FiPlus, FiMinus, FiShoppingBag } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
-<<<<<<< HEAD
 import { motion } from 'framer-motion';
-=======
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
 
 const Cart = () => {
     const { 
@@ -20,50 +17,31 @@ const Cart = () => {
 
     if (cartItems.length === 0) {
         return (
-<<<<<<< HEAD
             <motion.div className="min-h-screen bg-gray-50 pt-28 pb-12 px-4 sm:px-6 lg:px-8" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                 <motion.div className="max-w-7xl mx-auto text-center py-12" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }}>
-=======
-            <div className="min-h-screen bg-gray-50 pt-28 pb-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto text-center py-12">
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                     <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-4">
                         <FiShoppingBag className="w-8 h-8 text-gray-400" />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
                     <p className="text-gray-600 mb-6">Looks like you haven't added anything to your cart yet.</p>
                     <Link 
-                        to="/" 
+                        to="/product" 
                         className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#39251A] hover:bg-[#2a1c14]"
                     >
                         Continue Shopping
                     </Link>
-<<<<<<< HEAD
                 </motion.div>
             </motion.div>
-=======
-                </div>
-            </div>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
         );
     }
 
-    return (
-<<<<<<< HEAD
+    return (    
         <motion.section id="cart" className="pt-28" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
              <motion.div className="w-full bg-[#39251A] text-white" initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.4 }}>
                 <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
                     <h3 className="text-2xl tracking-wide">Cart</h3>
                 </div>
             </motion.div>
-=======
-        <section id="cart" className="pt-28">
-             <div className="w-full bg-[#39251A] text-white">
-                <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex items-center">
-                    <h3 className="text-2xl tracking-wide">Cart</h3>
-                </div>
-            </div>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
         
         <div className="min-h-screen bg-gray-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
@@ -87,7 +65,6 @@ const Cart = () => {
                                 </div>
                             </div>
 
-<<<<<<< HEAD
                             {cartItems.map((item, idx) => (
                                 <motion.div 
                                   key={item.id} 
@@ -96,10 +73,6 @@ const Cart = () => {
                                   animate={{ opacity: 1, y: 0 }}
                                   transition={{ duration: 0.35, delay: idx * 0.05 }}
                                 >
-=======
-                            {cartItems.map((item) => (
-                                <div key={item.id} className="p-4 border-b last:border-b-0 flex flex-col md:grid md:grid-cols-12 gap-4">
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     <div className="flex items-center col-span-5">
                                     <div className="flex-shrink-0 h-20 w-20 bg-gray-100 rounded-md overflow-hidden">
                                         <img
@@ -151,18 +124,14 @@ const Cart = () => {
                                             <FiTrash2 size={18} />
                                         </button>
                                     </div>
-<<<<<<< HEAD
                                 </motion.div>
-=======
-                                </div>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                             ))}
                         </div>
 
                         <div className="flex flex-col sm:flex-row justify-between mt-6 gap-4">
-                            <button className="px-6 py-2 border border-gray-300 rounded-md text-sm font-medium text-[#683292] hover:bg-gray-50">
+                            <Link to="/product"><button className="px-6 py-2 border border-gray-300 rounded-md text-sm font-medium text-[#683292] hover:bg-gray-50">
                                 Continue Shopping
-                            </button>
+                            </button></Link>
                             <div className="flex gap-4">
                                 <button className="px-6 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
                                     Update Cart
@@ -220,11 +189,7 @@ const Cart = () => {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
         </motion.section>
-=======
-        </section>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
     );
 };
 

@@ -53,7 +53,6 @@ const Contactus = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            {/* Header Section */}
             <motion.div
                 className="w-full bg-[#39251A] text-white"
                 initial={{ y: -50, opacity: 0 }}
@@ -72,7 +71,6 @@ const Contactus = () => {
                 </div>
             </motion.div>
 
-            {/* Hero Section */}
             <motion.div
                 className="items-center justify-center flex flex-col py-16"
                 initial={{ opacity: 0, y: 20 }}
@@ -100,7 +98,6 @@ const Contactus = () => {
                 </motion.p>
             </motion.div>
 
-            {/* Main Content */}
             <motion.div
                 className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12"
                 variants={container}
@@ -109,7 +106,6 @@ const Contactus = () => {
                 viewport={{ once: true, margin: "-100px" }}
             >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Contact Information */}
                     <motion.div className="space-y-8" variants={container}>
                         <motion.div variants={item}>
                             <motion.h3
@@ -127,7 +123,7 @@ const Contactus = () => {
                                     className="flex items-start gap-4 rounded bg-white border border-gray-200 p-4 shadow-lg"
                                     variants={item}
                                     whileHover={{ x: 5 }}
-                                >
+                                >   
                                     <motion.div
                                         className="mt-1 p-2 bg-[#39251A] rounded-full "
                                         whileHover={{ rotate: 360, scale: 1.1 }}
@@ -137,11 +133,7 @@ const Contactus = () => {
                                     </motion.div>
                                     <motion.div>
                                         <h4 className="font-semibold">Phone</h4>
-<<<<<<< HEAD
                                         <a href="tel:+15550000000" className="text-gray-600 hover:underline">+1 (555) 000-0000</a>
-=======
-                                        <p className="text-gray-600">+1 (555) 000-0000</p>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     </motion.div>
                                 </motion.div>
                                 <motion.div
@@ -158,11 +150,7 @@ const Contactus = () => {
                                     </motion.div>
                                     <div>
                                         <h4 className="font-semibold">Email</h4>
-<<<<<<< HEAD
                                         <a href="mailto:info@dairyfarm.com" className="text-gray-600 hover:underline">info@dairyfarm.com</a>
-=======
-                                        <p className="text-gray-600">info@dairyfarm.com</p>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     </div>
                                 </motion.div>
                                 <motion.div
@@ -179,7 +167,6 @@ const Contactus = () => {
                                     </motion.div>
                                     <div>
                                         <h4 className="font-semibold">Location</h4>
-<<<<<<< HEAD
                                         <a
                                             href="https://www.google.com/maps?q=123+Farm+Street,+Countryside,+12345"
                                             target="_blank"
@@ -188,16 +175,12 @@ const Contactus = () => {
                                         >
                                             123 Farm Street, Countryside, 12345
                                         </a>
-=======
-                                        <p className="text-gray-600">123 Farm Street, Countryside, 12345</p>
->>>>>>> fa764a6e02b035962cd0ed7d00b1106bdf33fc05
                                     </div>
                                 </motion.div>
                             </motion.div>
                         </motion.div>
                     </motion.div>
 
-                    {/* Contact Form */}
                     <motion.div
                         className="bg-white p-8 rounded-lg shadow-md"
                         variants={item}
@@ -291,8 +274,8 @@ const Contactus = () => {
                         <MapContainer
                             center={[51.505, -0.09]}
                             zoom={13}
-                            style={{ 
-                                height: '100%', 
+                            style={{
+                                height: '100%',
                                 width: '100%',
                                 position: 'relative',
                                 zIndex: 0
